@@ -1,6 +1,6 @@
 package cinema;
 
-public class Chair {
+public class Chair implements Comparable<Chair>{
     private String chairNumber;
     private boolean reserved = false;
 
@@ -30,5 +30,10 @@ public class Chair {
             return true;
         }
         return false;
+    }
+
+    @Override
+    public int compareTo(Chair chair) {
+        return this.chairNumber.compareToIgnoreCase(chair.getChairNumber());
     }
 }

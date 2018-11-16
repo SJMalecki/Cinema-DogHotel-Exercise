@@ -1,6 +1,7 @@
 package cinema;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class Cinema {
@@ -25,19 +26,27 @@ public class Cinema {
     }
 
     public boolean reserveChair(String chairNumber){
-        Chair requestChair = null;
-        for(Chair chair : chairs){
-            if(chair.getChairNumber().equals(chairNumber)){
-                requestChair = chair;
-                break;
-            }
-        }
-
-        if(requestChair == null){
-            System.out.println("There is no chair " + chairNumber );
+        Chair requestChair = new Chair(chairNumber);
+        int foundChair = Collections.binarySearch(chairs, requestChair, null);
+        if(foundChair >=0){
+            return chairs.get(foundChair).reserve();
+        }else{
+            System.out.println("There is no chair " + chairNumber);
             return false;
         }
-        return requestChair.reserve();
+//        for(Chair chair : chairs){
+//            System.out.print("*");
+//            if(chair.getChairNumber().equals(chairNumber)){
+//                requestChair = chair;
+//                break;
+//            }
+//        }
+//
+//        if(requestChair == null){
+//            System.out.println("There is no chair " + chairNumber );
+//            return false;
+//        }
+//        return requestChair.reserve();
     }
 
     public void getChair() {
